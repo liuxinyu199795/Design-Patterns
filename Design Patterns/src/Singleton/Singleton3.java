@@ -6,20 +6,9 @@ package Singleton;
  * @ClassName: Singleton3
  * @Author: XinyuLiu
  * @Date: 2019/8/13 10:49
- * 懒汉式-线程安全
- * 意义：只需要对 getSingleton() 方法加锁，那么在一个时间点只能有一个线程能够进入该方法，从而避免了实例化多次 uniqueInstance。
- * 但是当一个线程进入该方法之后，其它试图进入该方法的线程都必须等待，即使 uniqueInstance 已经被实例化了。
- * 这会让线程阻塞时间过长，因此该方法有性能问题，不推荐使用。
+ * 枚举类（线程安全，饿汉式，可以防止反射）
+ * 意义：使用枚举实现的单例模式，不但可以防止利用反射强行构建单例对象，而且可以在枚举类对象被反序列化的时候，保证反序列的返回结果是同一对象。
  */
-public class Singleton3 {
-    private static Singleton3 uniqueInstance;
-    private Singleton3(){
-
-    }
-    public static synchronized Singleton3 getSingleton(){
-        if(uniqueInstance==null){
-            uniqueInstance = new Singleton3();
-        }
-        return uniqueInstance;
-    }
+public enum Singleton3 {
+    INSTANCE;
 }
